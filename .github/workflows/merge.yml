@@ -69,7 +69,6 @@ jobs:
           # install tagged version
           # python -m pip install git+https://github.com/nfdi4cat/voc4cat-tool.git@v1.0.0rc2
           python -m pip install git+https://github.com/nfdi4cat/voc4cat-tool.git@main
-          voc4cat --version
 
           # install custom pylode 2.x
           python -m pip install git+https://github.com/dalito/pyLODE.git@nfdi4cat-2.x
@@ -82,6 +81,7 @@ jobs:
 
       - name: Run voc4cat (publish joined & split SKOS/turtle)
         run: |
+          voc4cat --version
           mkdir -p publish/dev/
           # delete files xlsx, xml and ttl produced in previous workflow runs
           find publish/dev/ -type f \( -name "*.xlsx" -o -name "*.ttl" -o -name "*.xml" \) -delete
