@@ -96,7 +96,7 @@ jobs:
           voc4cat convert --config _main_branch/idranges.toml --logfile outbox/voc4cat.log --outdir outbox inbox-excel-vocabs/
           if [ ! -f outbox/*.ttl ]; then
             echo "No ttl file in outbox. Building joined vocabulary ttl-file from individual ttl-files in vocabulary."
-            voc4cat transform --join --logfile outbox/voc4cat.log --outdir outbox/ vocabularies/
+            voc4cat transform --join --config _main_branch/idranges.toml --logfile outbox/voc4cat.log --outdir outbox/ vocabularies/
           fi
 
       - name: Run voc4cat (post-convert checks)
@@ -112,19 +112,19 @@ jobs:
 
       - name: Split vocabulary, merge into vocabulary dir (in PR branch) and update provenance info
         run: |
-          voc4cat transform --split --inplace --logfile outbox/voc4cat.log --outdir outbox_new_voc outbox/
+          voc4cat transform --split --inplace  --config idranges.toml --logfile outbox/voc4cat.log --outdir outbox_new_voc outbox/
           voc4cat-merge --logfile outbox/voc4cat.log  outbox_new_voc/ vocabularies/
           # copy xlsx to outbox so that the xlsx file is part of the artifact
           find inbox-excel-vocabs -name '*.xlsx' -exec cp {} -t outbox/ \;
           git status
           # Add/update dct:created and dct:modified base on git history
-          voc4cat transform --prov-from-git --inplace --logfile outbox/voc4cat.log vocabularies/
+          voc4cat transform --prov-from-git --inplace --config idranges.toml --logfile outbox/voc4cat.log vocabularies/
 
       - name: Run voc4cat (re-build updated Excel file and joined turtle vocabulary file)
         # Passing the config is important to make use of the prefixes therein.
         run: |
           mkdir -p outbox/updated-xlsx-ttl
-          voc4cat transform --config idranges.toml --logfile outbox/voc4cat.log -O outbox/updated-xlsx-ttl --join vocabularies/
+          voc4cat transform --join --config idranges.toml --logfile outbox/voc4cat.log -O outbox/updated-xlsx-ttl vocabularies/
           # Using a template is optional and gives just a warning if missing.
           voc4cat convert --config idranges.toml --logfile outbox/voc4cat.log --template templates/default_sheets.xlsx outbox/updated-xlsx-ttl
 
