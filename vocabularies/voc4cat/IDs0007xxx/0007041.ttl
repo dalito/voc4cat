@@ -7,11 +7,13 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
 voc4cat:0007041
     a skos:Concept ;
-    dcterms:created "2025-01-07"^^xsd:date ;
+    dcterms:created "2025-12-30"^^xsd:date ;
     dcterms:identifier "0007041"^^xsd:token ;
+    dcterms:license <https://creativecommons.org/licenses/by-sa/4.0/> ;
     dcterms:modified "2025-12-30"^^xsd:date ;
-    dcterms:provenance <https://github.com/nfdi4cat/voc4cat/blame/main/vocabularies/voc4cat/0007041.ttl> ;
-    rdfs:seeAlso <https://github.com/nfdi4cat/voc4cat/blame/main/vocabularies/voc4cat/0007041.ttl> ;
+    dcterms:provenance <https://github.com/dalito/voc4cat/blame/main/vocabularies/voc4cat/0007041.ttl> ;
+    dcterms:rightsHolder "https://iupac.org/" ;
+    rdfs:seeAlso <https://github.com/dalito/voc4cat/blame/main/vocabularies/voc4cat/0007041.ttl> ;
     skos:altLabel "elementary step"@en ;
     skos:broader voc4cat:0000181 ;
     skos:changeNote "0000-0002-4041-0165 Julia Schumann created the resource"@en ;
