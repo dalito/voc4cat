@@ -46,6 +46,7 @@ jobs:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           # Checkout the branch made in the fork.
           ref: ${{ github.head_ref }}
+          fetch-depth: 0
           # Be specific about keeping credentials (it is the default)
           persist-credentials: true
 
